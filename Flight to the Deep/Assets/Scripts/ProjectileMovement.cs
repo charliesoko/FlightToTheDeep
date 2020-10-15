@@ -10,6 +10,9 @@ public class ProjectileMovement : MonoBehaviour
     [SerializeField]
     private float projectileDamage;
 
+    [SerializeField]
+    private float destroyDelay;
+
     //Establish bool to track if the projectile has hit anything.
     private bool noHit;
     void Start()
@@ -24,5 +27,16 @@ public class ProjectileMovement : MonoBehaviour
                 transform.Translate(Vector3.forward * Time.deltaTime * projectileSpeed);
             else if (transform.parent.tag == "Enemy")
                 transform.Translate(Vector3.back * Time.deltaTime * projectileSpeed);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            noHit = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+            Destroy(gameObject, destroyDelay);
+        }
     }
 }

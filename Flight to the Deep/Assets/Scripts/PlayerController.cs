@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     //Establish the projectile prefab to be used for firing, as well as the transform used to establish where the projectile is fired from.
     public GameObject projectilePrefab;
     public Transform firingPoint;
+    [SerializeField]
+    public float attackDamage;
 
     void Start()
     {

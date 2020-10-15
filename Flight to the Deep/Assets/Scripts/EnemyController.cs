@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    //Establish Enemy health and attack damage variables.
+    [SerializeField]
+    private float enemyHealth;
+    [SerializeField]
+    public float enemyDamage;
+    [SerializeField]
+    private float destroyDelay;
+
     //Establish two speed variables, one for when the Enemy is advancing and one for strafing left and right.
     [SerializeField]
     private float movementSpeed;
@@ -37,6 +45,15 @@ public class EnemyController : MonoBehaviour
         {
             Strafe();
         }
+
+        if (enemyHealth == 0)
+        {
+            enemyHealth = -1;
+            strafeSpeed = 0;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject, destroyDelay);
+        }
     }
     
     //Method to manage strafing left and right.
@@ -67,6 +84,22 @@ public class EnemyController : MonoBehaviour
         if (strafeDirection == 1)
         {
             transform.Translate(Vector3.right * strafeSpeed * Time.deltaTime, Space.World);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            PlayerController playerScript = collision.collider.GetComponentInParent<PlayerController>();
+            float damage = playerScript.attackDamage;
+
+            if (enemyHealth > 0)
+                enemyHealth -= damage;
+        }
+        else if (collision.collider.CompareTag("Enemy"))
+        {
+            strafeDirection *= -1;
         }
     }
 }
