@@ -326,8 +326,8 @@ MonoBehaviour:
   playerHealth: 100
   leftBound: -9
   rightBound: 9
-  forwardBound: 7
-  backBound: 0
+  forwardBound: 4
+  backBound: -0.5
   projectilePrefab: {fileID: 2892476064797757729, guid: 6603c8d8bd417704abd665dd77f6a3f9,
     type: 3}
   firingPoint: {fileID: 1745883908}
@@ -524,6 +524,7 @@ MonoBehaviour:
   - {fileID: 6005585439705858189, guid: 66b8795dbb934e4468112118f18eba47, type: 3}
   - {fileID: 9012560084305748739, guid: 0103b1786fe6a3248be3a1e70a5a7383, type: 3}
   - {fileID: 2949217174317562614, guid: d73d19c168703054e842c90fb0a9e669, type: 3}
+  - {fileID: 8829281345349360705, guid: 50b037cec6d5aa44b808e3d6d7ff3598, type: 3}
   waveNumber: 0
 --- !u!4 &1443847951
 Transform:

@@ -38,5 +38,13 @@ public class ProjectileMovement : MonoBehaviour
             gameObject.GetComponent<SphereCollider>().enabled = false;
             Destroy(gameObject, destroyDelay);
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            noHit = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+            Destroy(gameObject, destroyDelay);
+        }
     }
 }

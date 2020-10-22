@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7194743526495532147}
   - component: {fileID: 7194743526495532146}
   - component: {fileID: -4574686404388527512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5, y: 0, z: 28}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 24940689646693097}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,9 +113,13 @@ MonoBehaviour:
   destroyDelay: 1.5
   movementSpeed: 10
   strafeSpeed: 7.5
-  lowerBound: 11
-  leftBound: -10
-  rightBound: 10
+  lowerBound: 9
+  leftBound: -9
+  rightBound: 9
+  fireDelay: 0.75
+  projectilePrefab: {fileID: 2892476064797757729, guid: 6d803a0ba1c6f4e46b2d1de0a3f1f590,
+    type: 3}
+  firingPoint: {fileID: 24940689646693097}
 --- !u!54 &-4574686404388527512
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -131,3 +136,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &8134652832515930763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 24940689646693097}
+  m_Layer: 8
+  m_Name: FiringPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &24940689646693097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8134652832515930763}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7194743526495532150}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

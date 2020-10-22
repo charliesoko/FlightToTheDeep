@@ -29,9 +29,20 @@ public class EnemyController : MonoBehaviour
     //Float to be used for determining if the Enemy is strafing left or right.
     private float strafeDirection = 0;
 
+    [SerializeField]
+    private float fireDelay;
+
+    private bool isReadyForCombat = false;
+    private bool isFiring = false;
+    private IEnumerator firing;
+
+    public GameObject projectilePrefab;
+    public Transform firingPoint;
+
+
     void Start()
     {
-        
+        firing = Attack(fireDelay);
     }
 
 
@@ -43,7 +54,16 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            isReadyForCombat = true;
+        }
+
+        if (isReadyForCombat)
+        {
             Strafe();
+            if (!isFiring)
+            {
+                StartCoroutine(firing);
+            }
         }
 
         if (enemyHealth == 0)
@@ -100,6 +120,19 @@ public class EnemyController : MonoBehaviour
         else if (collision.collider.CompareTag("Enemy"))
         {
             strafeDirection *= -1;
+        }
+    }
+
+    private IEnumerator Attack(float fireDelay)
+    {
+        while (true)
+        {
+            isFiring = true;
+            yield return new WaitForSeconds(fireDelay);
+            var bullet = Instantiate(projectilePrefab, firingPoint.position, Quaternion.identity);
+            bullet.transform.SetParent(gameObject.transform, true);
+            yield return new WaitForSeconds(fireDelay);
+            isFiring = false;
         }
     }
 }

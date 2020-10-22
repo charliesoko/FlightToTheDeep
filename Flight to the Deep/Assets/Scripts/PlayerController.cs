@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     //Establish the projectile prefab to be used for firing, as well as the transform used to establish where the projectile is fired from.
     public GameObject projectilePrefab;
     public Transform firingPoint;
+    
     [SerializeField]
     public float attackDamage;
 
@@ -63,6 +64,27 @@ public class PlayerController : MonoBehaviour
             GameObject projectile;
             projectile = Instantiate(projectilePrefab, firingPoint.position, projectilePrefab.transform.rotation);
             projectile.transform.parent = gameObject.transform;
+        }
+
+        if (playerHealth <= 0)
+        {
+            playerHealth = -1;
+            playerSpeed = 0;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject, 1.5f);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            EnemyController enemyScript = collision.collider.GetComponentInParent<EnemyController>();
+            float damage = enemyScript.enemyDamage;
+
+            if (playerHealth > 0)
+                playerHealth -= damage;
         }
     }
 }
